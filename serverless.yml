@@ -18,8 +18,17 @@ provider:
   name: aws
   runtime: nodejs12.x
   profile: tbbcdev
+  tracing:
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
   httpApi:
-    cors:
+    cors: true 
 # you can add statements to the Lambda function's IAM Role here
 #  iam:
 #    role:
