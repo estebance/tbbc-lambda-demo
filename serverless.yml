@@ -29,6 +29,10 @@ provider:
       Resource: "*"
   httpApi:
     cors: true 
+#     - Effect: Allow 
+#       Action: 
+#         - s3:ListAllMyBuckets
+#       Resource: "*"
 # you can add statements to the Lambda function's IAM Role here
 #  iam:
 #    role:
@@ -62,10 +66,12 @@ provider:
 functions:
   users:
     handler: users/handler.users
+    environment:
+      ANOTHER_SERVICE_URL: 'https://new-api-wizit.com/profiles'
     events:
       - httpApi:
           path: /v1/users/{proxy+}
-          method: '*'
+          method: '*' 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
